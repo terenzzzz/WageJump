@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B1E4D4AA300E150500F2ABE7 /* WageJumpWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B1E4D4A2300E150500F2ABE7 /* WageJumpWidgetExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A0E3D391300E150500F2ABE7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,13 +25,45 @@
 			remoteGlobalIDString = A0E3D381300E150300F2ABE7;
 			remoteInfo = WageJump;
 		};
+		B1E4D4A3300E150500F2ABE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0E3D37A300E150300F2ABE7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1E4D4A5300E150500F2ABE7;
+			remoteInfo = WageJumpWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B1E4D4A9300E150500F2ABE7 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B1E4D4AA300E150500F2ABE7 /* WageJumpWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A0E3D382300E150300F2ABE7 /* WageJump.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WageJump.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0E3D390300E150500F2ABE7 /* WageJumpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WageJumpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0E3D39A300E150500F2ABE7 /* WageJumpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WageJumpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1E4D4A2300E150500F2ABE7 /* WageJumpWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WageJumpWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B1E4D4AE300E150500F2ABE7 /* Exceptions for "WageJumpWidget" folder in "WageJumpWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B1E4D4A5300E150500F2ABE7 /* WageJumpWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A0E3D384300E150300F2ABE7 /* WageJump */ = {
@@ -43,6 +79,19 @@
 		A0E3D39D300E150500F2ABE7 /* WageJumpUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = WageJumpUITests;
+			sourceTree = "<group>";
+		};
+		B1E4D4A0300E150500F2ABE7 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B1E4D4A1300E150500F2ABE7 /* WageJumpWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B1E4D4AE300E150500F2ABE7 /* Exceptions for "WageJumpWidget" folder in "WageJumpWidgetExtension" target */,
+			);
+			path = WageJumpWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,13 +118,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1E4D4A6300E150500F2ABE7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		A0E3D379300E150300F2ABE7 = {
 			isa = PBXGroup;
 			children = (
+				B1E4D4A0300E150500F2ABE7 /* Shared */,
 				A0E3D384300E150300F2ABE7 /* WageJump */,
+				B1E4D4A1300E150500F2ABE7 /* WageJumpWidget */,
 				A0E3D393300E150500F2ABE7 /* WageJumpTests */,
 				A0E3D39D300E150500F2ABE7 /* WageJumpUITests */,
 				A0E3D383300E150300F2ABE7 /* Products */,
@@ -86,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				A0E3D382300E150300F2ABE7 /* WageJump.app */,
+				B1E4D4A2300E150500F2ABE7 /* WageJumpWidgetExtension.appex */,
 				A0E3D390300E150500F2ABE7 /* WageJumpTests.xctest */,
 				A0E3D39A300E150500F2ABE7 /* WageJumpUITests.xctest */,
 			);
@@ -102,13 +161,16 @@
 				A0E3D37E300E150300F2ABE7 /* Sources */,
 				A0E3D37F300E150300F2ABE7 /* Frameworks */,
 				A0E3D380300E150300F2ABE7 /* Resources */,
+				B1E4D4A9300E150500F2ABE7 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B1E4D4A4300E150500F2ABE7 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A0E3D384300E150300F2ABE7 /* WageJump */,
+				B1E4D4A0300E150500F2ABE7 /* Shared */,
 			);
 			name = WageJump;
 			packageProductDependencies = (
@@ -163,6 +225,29 @@
 			productReference = A0E3D39A300E150500F2ABE7 /* WageJumpUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		B1E4D4A5300E150500F2ABE7 /* WageJumpWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1E4D4AB300E150500F2ABE7 /* Build configuration list for PBXNativeTarget "WageJumpWidgetExtension" */;
+			buildPhases = (
+				B1E4D4A8300E150500F2ABE7 /* Sources */,
+				B1E4D4A6300E150500F2ABE7 /* Frameworks */,
+				B1E4D4A7300E150500F2ABE7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B1E4D4A0300E150500F2ABE7 /* Shared */,
+				B1E4D4A1300E150500F2ABE7 /* WageJumpWidget */,
+			);
+			name = WageJumpWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = WageJumpWidgetExtension;
+			productReference = B1E4D4A2300E150500F2ABE7 /* WageJumpWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +269,14 @@
 						CreatedOnToolsVersion = 16.4;
 						TestTargetID = A0E3D381300E150300F2ABE7;
 					};
+					B1E4D4A5300E150500F2ABE7 = {
+						CreatedOnToolsVersion = 16.4;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = A0E3D37D300E150300F2ABE7 /* Build configuration list for PBXProject "WageJump" */;
@@ -201,6 +294,7 @@
 			projectRoot = "";
 			targets = (
 				A0E3D381300E150300F2ABE7 /* WageJump */,
+				B1E4D4A5300E150500F2ABE7 /* WageJumpWidgetExtension */,
 				A0E3D38F300E150500F2ABE7 /* WageJumpTests */,
 				A0E3D399300E150500F2ABE7 /* WageJumpUITests */,
 			);
@@ -223,6 +317,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A0E3D398300E150500F2ABE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1E4D4A7300E150500F2ABE7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +354,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1E4D4A8300E150500F2ABE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +373,11 @@
 			isa = PBXTargetDependency;
 			target = A0E3D381300E150300F2ABE7 /* WageJump */;
 			targetProxy = A0E3D39B300E150500F2ABE7 /* PBXContainerItemProxy */;
+		};
+		B1E4D4A4300E150500F2ABE7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B1E4D4A5300E150500F2ABE7 /* WageJumpWidgetExtension */;
+			targetProxy = B1E4D4A3300E150500F2ABE7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -389,10 +502,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WageJump/WageJump.entitlements;
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "WageJump/WageJump-iOS.entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]" = "WageJump/WageJump-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = YACSVQ6U8M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WageJump;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -426,10 +543,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WageJump/WageJump.entitlements;
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "WageJump/WageJump-iOS.entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]" = "WageJump/WageJump-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = YACSVQ6U8M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WageJump;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -462,7 +583,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
@@ -484,7 +605,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
@@ -505,7 +626,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
@@ -526,7 +647,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
@@ -540,6 +661,76 @@
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				TEST_TARGET_NAME = WageJump;
 				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+		B1E4D4AC300E150500F2ABE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = WageJumpWidget/WageJumpWidget.entitlements;
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "WageJumpWidget/WageJumpWidget-iOS.entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]" = "WageJumpWidget/WageJumpWidget-iOS.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = YACSVQ6U8M;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = WageJumpWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WageJump;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tenenzzzz.WageJump.WageJumpWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B1E4D4AD300E150500F2ABE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = WageJumpWidget/WageJumpWidget.entitlements;
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "WageJumpWidget/WageJumpWidget-iOS.entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]" = "WageJumpWidget/WageJumpWidget-iOS.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = YACSVQ6U8M;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = WageJumpWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WageJump;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tenenzzzz.WageJump.WageJumpWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -578,6 +769,15 @@
 			buildConfigurations = (
 				A0E3D3AB300E150500F2ABE7 /* Debug */,
 				A0E3D3AC300E150500F2ABE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1E4D4AB300E150500F2ABE7 /* Build configuration list for PBXNativeTarget "WageJumpWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1E4D4AC300E150500F2ABE7 /* Debug */,
+				B1E4D4AD300E150500F2ABE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

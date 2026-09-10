@@ -1,0 +1,23 @@
+# Xcode / macOS
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xccheckout
+*.xcscmblueprint
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# OS
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+
+# Misc
+-:xml
+*.swp
+*~
