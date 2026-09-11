@@ -127,20 +127,18 @@ struct WageJumpWidgetEntryView: View {
 
     private func smallView(snapshot: IncomeSnapshot, now: Date) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                statusRow(snapshot: snapshot)
-                Spacer(minLength: 4)
-                syncTimeText
-            }
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text("今日入账")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.secondary)
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 6) {
+                    statusDot(snapshot: snapshot)
+                    Text("今日入账")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    Spacer(minLength: 4)
+                    syncTimeText
+                }
                 amountRow(snapshot: snapshot, symbolSize: 22, amountSize: 28)
+                progressTrack(progress: snapshot.todayProgress, height: 10, knob: 12)
             }
-
-            progressTrack(progress: snapshot.todayProgress, height: 10, knob: 12)
 
             Text("发薪 \(snapshot.daysUntilPayday) 天")
                 .font(.caption2.weight(.semibold))
@@ -151,42 +149,21 @@ struct WageJumpWidgetEntryView: View {
 
     private func mediumView(snapshot: IncomeSnapshot, now: Date) -> some View {
         VStack(spacing: 12) {
-            HStack {
-                statusRow(snapshot: snapshot)
-                Spacer()
-                syncTimeText
-            }
-
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Text("今日入账")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(.secondary)
-                    Spacer(minLength: 8)
-                    Text("本月 \(CurrencyFormatter.string(amount: snapshot.monthIncome, currencyCode: entry.currencyCode))")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.7)
-                }
-
-                HStack(alignment: .lastTextBaseline, spacing: 16) {
-                    amountRow(snapshot: snapshot, symbolSize: 26, amountSize: 34)
-                    Spacer(minLength: 8)
-                    VStack(alignment: .trailing, spacing: 4) {
-                        Text("今日预计")
-                            .font(.caption2.weight(.semibold))
+                    HStack(spacing: 6) {
+                        statusDot(snapshot: snapshot)
+                        Text("今日入账")
+                            .font(.caption.weight(.semibold))
                             .foregroundStyle(.secondary)
-                        Text(projectedIncomeText(snapshot: snapshot))
-                            .font(.subheadline.weight(.bold))
-                            .foregroundStyle(.primary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.7)
                     }
+                    Spacer(minLength: 8)
+                    syncTimeText
                 }
-            }
 
-            progressTrack(progress: snapshot.todayProgress, height: 12, knob: 14)
+                amountRow(snapshot: snapshot, symbolSize: 26, amountSize: 34)
+                progressTrack(progress: snapshot.todayProgress, height: 12, knob: 14)
+            }
 
             HStack {
                 labeledStat(title: "已工作", value: workedTimeText(snapshot: snapshot))
@@ -200,7 +177,7 @@ struct WageJumpWidgetEntryView: View {
     }
 
     private var syncTimeText: some View {
-        Text(entry.configLoaded ? "同步 \(formattedSyncTime(entry.date))" : "未同步")
+        Text(entry.configLoaded ? "最后同步 \(formattedSyncTime(entry.date))" : "未同步")
             .font(.caption2.weight(.medium))
             .foregroundStyle(entry.configLoaded ? Color.secondary.opacity(0.7) : Color.orange)
             .lineLimit(1)
@@ -218,15 +195,10 @@ struct WageJumpWidgetEntryView: View {
         return formatter.string(from: date)
     }
 
-    private func statusRow(snapshot: IncomeSnapshot) -> some View {
-        HStack(spacing: 6) {
-            Circle()
-                .fill(workStatusColor(snapshot: snapshot))
-                .frame(width: 7, height: 7)
-            Text(workStatusText(snapshot: snapshot))
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(.secondary)
-        }
+    private func statusDot(snapshot: IncomeSnapshot) -> some View {
+        Circle()
+            .fill(workStatusColor(snapshot: snapshot))
+            .frame(width: 7, height: 7)
     }
 
     private func amountRow(snapshot: IncomeSnapshot, symbolSize: CGFloat, amountSize: CGFloat) -> some View {
@@ -290,14 +262,6 @@ struct WageJumpWidgetEntryView: View {
         .frame(height: max(height, knob))
     }
 
-    private func workStatusText(snapshot: IncomeSnapshot) -> String {
-        switch snapshot.workPhase {
-        case .working: return "正在上班"
-        case .lunch: return "午休中"
-        case .offDuty: return "暂未工作"
-        }
-    }
-
     private func workStatusColor(snapshot: IncomeSnapshot) -> Color {
         switch snapshot.workPhase {
         case .working: return .green
@@ -311,11 +275,6 @@ struct WageJumpWidgetEntryView: View {
         formatter.numberStyle = .currency
         formatter.currencyCode = code
         return formatter.currencySymbol ?? "¥"
-    }
-
-    private func projectedIncomeText(snapshot: IncomeSnapshot) -> String {
-        let projected = Double(entry.dailyWorkMinutes) * snapshot.minuteIncome
-        return CurrencyFormatter.string(amount: projected, currencyCode: entry.currencyCode)
     }
 
     private func workedTimeText(snapshot: IncomeSnapshot) -> String {
