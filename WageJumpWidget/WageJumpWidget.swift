@@ -111,7 +111,7 @@ struct WageJumpWidgetEntryView: View {
         content(snapshot: entry.snapshot, now: entry.date)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .containerBackground(for: .widget) {
-                Color.white
+                Color.widgetBackground
             }
     }
 
@@ -246,14 +246,14 @@ struct WageJumpWidgetEntryView: View {
 
             ZStack(alignment: .leading) {
                 Capsule()
-                    .fill(Color.black.opacity(0.08))
+                    .fill(Color.primary.opacity(0.08))
                     .frame(height: height)
                 Capsule()
                     .fill(LinearGradient(colors: [.orange, .yellow], startPoint: .leading, endPoint: .trailing))
                     .frame(width: fillWidth, height: height)
                 Circle()
                     .fill(Color.orange)
-                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                    .overlay(Circle().stroke(Color.widgetBackground, lineWidth: 2))
                     .frame(width: knob, height: knob)
                     .offset(x: max(0, min(width - knob, fillWidth - knob / 2)))
             }
@@ -307,5 +307,16 @@ struct WageJumpWidget: Widget {
         .configurationDisplayName("WageJump")
         .description("实时查看今日收入与工作进度。")
         .supportedFamilies([.systemSmall, .systemMedium])
+    }
+}
+
+private extension Color {
+    /// 跟随系统浅色 / 暗黑模式的小组件背景。
+    static var widgetBackground: Color {
+#if os(macOS)
+        Color(nsColor: .windowBackgroundColor)
+#else
+        Color(uiColor: .systemBackground)
+#endif
     }
 }

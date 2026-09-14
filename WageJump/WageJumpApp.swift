@@ -20,7 +20,7 @@ struct WageJumpApp: App {
 #if os(macOS)
                 .frame(minWidth: 420, minHeight: 560)
 #endif
-                .background(Color.white.ignoresSafeArea())
+                .background(AppColors.pageBackground.ignoresSafeArea())
                 .onAppear {
                     viewModel.recalculate()
                     WidgetCenter.shared.reloadTimelines(ofKind: "WageJumpWidget")

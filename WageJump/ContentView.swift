@@ -22,7 +22,7 @@ struct ContentView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.white.ignoresSafeArea())
+        .background(AppColors.pageBackground.ignoresSafeArea())
         .sheet(isPresented: $isPresentingSettings) {
             SettingsView(config: viewModel.config) { updated in
                 viewModel.saveConfig(updated)
@@ -54,7 +54,7 @@ struct ContentView: View {
             .scrollIndicators(.hidden)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .background(Color.white.ignoresSafeArea())
+        .background(AppColors.pageBackground.ignoresSafeArea())
     }
 
     private struct DashboardLayout {
@@ -142,7 +142,7 @@ struct ContentView: View {
                 }
                 .background(
                     RoundedRectangle(cornerRadius: 16, style: .continuous)
-                        .fill(Color(red: 0.97, green: 0.97, blue: 0.975))
+                        .fill(AppColors.secondaryBackground)
                 )
             }
         }
@@ -167,7 +167,7 @@ struct ContentView: View {
         .padding(.vertical, 12)
         .background(
             RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .fill(Color(red: 0.97, green: 0.97, blue: 0.975))
+                .fill(AppColors.secondaryBackground)
         )
     }
 
@@ -308,14 +308,14 @@ struct ContentView: View {
 
             ZStack(alignment: .leading) {
                 Capsule()
-                    .fill(Color.black.opacity(0.08))
+                    .fill(Color.primary.opacity(0.08))
                     .frame(height: 22)
                 Capsule()
                     .fill(LinearGradient(colors: [.orange, .yellow], startPoint: .leading, endPoint: .trailing))
                     .frame(width: fillWidth, height: 22)
                 Circle()
                     .fill(.orange)
-                    .overlay(Circle().stroke(.white, lineWidth: 3))
+                    .overlay(Circle().stroke(AppColors.pageBackground, lineWidth: 3))
                     .frame(width: 24, height: 24)
                     .offset(x: max(0, min(width - 24, fillWidth - 12)))
             }
@@ -567,14 +567,48 @@ struct SettingsView: View {
     }
 }
 
+enum AppColors {
+    static var pageBackground: Color {
+#if os(macOS)
+        Color(nsColor: .windowBackgroundColor)
+#else
+        Color(uiColor: .systemBackground)
+#endif
+    }
+
+    static var secondaryBackground: Color {
+#if os(macOS)
+        Color(nsColor: .controlBackgroundColor)
+#else
+        Color(uiColor: .secondarySystemBackground)
+#endif
+    }
+
+    static var cardBackground: Color {
+#if os(macOS)
+        Color(nsColor: .controlBackgroundColor)
+#else
+        Color(uiColor: .secondarySystemBackground)
+#endif
+    }
+
+    static var cardBorder: Color { Color.primary.opacity(0.08) }
+    static var fieldFill: Color { Color.primary.opacity(0.06) }
+    static var fieldBorder: Color { Color.primary.opacity(0.10) }
+    static var label: Color { .secondary }
+    static var selectedFill: Color { Color.orange.opacity(0.18) }
+    static var selectedBorder: Color { Color.orange.opacity(0.35) }
+    static var stepperFill: Color { Color.primary.opacity(0.08) }
+}
+
 private enum SettingsTheme {
-    static let pageBackground = Color(red: 0.965, green: 0.965, blue: 0.97)
-    static let cardBorder = Color.black.opacity(0.06)
-    static let fieldFill = Color(red: 0.97, green: 0.97, blue: 0.975)
-    static let fieldBorder = Color.black.opacity(0.08)
-    static let label = Color.secondary
-    static let selectedFill = Color(red: 1.0, green: 0.93, blue: 0.86)
-    static let selectedBorder = Color.orange.opacity(0.35)
+    static var pageBackground: Color { AppColors.pageBackground }
+    static var cardBorder: Color { AppColors.cardBorder }
+    static var fieldFill: Color { AppColors.fieldFill }
+    static var fieldBorder: Color { AppColors.fieldBorder }
+    static var label: Color { AppColors.label }
+    static var selectedFill: Color { AppColors.selectedFill }
+    static var selectedBorder: Color { AppColors.selectedBorder }
 }
 
 struct SettingsForm: View {
@@ -673,7 +707,7 @@ struct SettingsForm: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(Color.white)
+                .fill(AppColors.cardBackground)
                 .overlay(
                     RoundedRectangle(cornerRadius: 18, style: .continuous)
                         .stroke(SettingsTheme.cardBorder, lineWidth: 1)
@@ -782,7 +816,7 @@ private struct CompactStepper: View {
         }
         .background(
             RoundedRectangle(cornerRadius: 9, style: .continuous)
-                .fill(Color(red: 0.95, green: 0.95, blue: 0.96))
+                .fill(AppColors.stepperFill)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 9, style: .continuous)
