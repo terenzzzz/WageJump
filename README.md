@@ -128,6 +128,7 @@ WageJump/
 ├── WageJump/           # 主 App（SwiftUI）
 ├── WageJumpWidget/     # 小组件扩展
 ├── Shared/             # 主 App 与小组件共用的计算与存储
+├── scripts/            # macOS 安装包脚本
 ├── WageJumpTests/
 └── WageJumpUITests/
 ```
@@ -146,13 +147,48 @@ WageJump/
 **不想改 Bundle ID，只想自己玩**  
 仍建议至少改 Team；若 Team 与工程里写死的 Bundle ID / Group 不匹配，仍会失败。
 
+## 打包 macOS 安装包
+
+日常用 Xcode 运行时，免费 Apple ID 的开发描述文件大约 **7 天**过期。要给别人一个不用重新编译、也不会 7 天后失效的 Mac 安装包，用 ad-hoc 签名打 DMG。这种方式没有开发者证书，对方第一次打开需要手动放行。
+
+在项目根目录执行（需要完整 Xcode，不能只有 Command Line Tools）：
+
+```bash
+./scripts/package-dmg.sh
+```
+
+脚本会编译 Release、去掉描述文件后做 ad-hoc 签名，并生成：
+
+```text
+dist/WageJump-<版本号>.dmg
+```
+
+`dist/` 和 `build/` 已在 `.gitignore` 里，安装包不会进仓库。这条打包路径不会改工程里的 Team 和日常签名。
+
+磁盘镜像里有 `WageJump.app`、指向「应用程序」的快捷方式，以及 `请先读我.txt`。对方安装：
+
+1. 把 WageJump 拖进「应用程序」
+2. 在「应用程序」里对 WageJump 点右键，选择「打开」
+3. 若仍被拦截，到「系统设置 → 隐私与安全性」里点「仍要打开」
+
+这个包是通用二进制，Apple 芯片和 Intel Mac 都可以用，系统要求仍是 macOS 15.5+。
+
+签名里不会带上 App Group。那是受限制的权限，没有 Apple 描述文件时系统会直接结束进程。主应用和小组件在 Mac 上仍通过沙盒允许的共享目录交换数据。目录名与 entitlements 里的 Group ID 一致，当前仓库是：
+
+```text
+~/Library/Group Containers/group.tenenzzzz.WageJump/
+~/Library/Application Scripts/group.tenenzzzz.WageJump/
+```
+
+iPhone 不能用这个 DMG。装到手机上仍然用 Xcode 运行，免费账号还是大约 7 天需要重签。
+
 ## 分发说明
 
-本项目以开源方式分享，**默认不提供** App Store / TestFlight / 已公证安装包。
+本项目以开源方式分享，**不提供** App Store / TestFlight / 已公证安装包。
 
-- 自己用：按上文 Xcode 编译即可  
-- 给别人用：让对方自行克隆编译（无需你购买开发者会员）  
-- 若要公开发布到商店或提供「下载即开」的安装包，需要加入 [Apple Developer Program](https://developer.apple.com/programs/)
+- 自己用：按上文用 Xcode 编译
+- 给别人一个 Mac 安装包：用上一节打出 DMG。对方需要右键打开，不是双击即用
+- 若要双击就能打开、或上架商店，需要加入 [Apple Developer Program](https://developer.apple.com/programs/)，用 Developer ID 签名并公证
 
 ## License
 
