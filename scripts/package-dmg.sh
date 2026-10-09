@@ -73,29 +73,63 @@ sign_item "$APP_ENT" "$APP"
 codesign --verify --deep --strict --verbose=2 "$APP"
 
 VERSION="$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "$APP/Contents/Info.plist")"
-cat > "$STAGE/请先读我.txt" <<EOF
-WageJump ${VERSION}
-
-这个安装包没有使用 Apple 开发者签名，也没有嵌入会在 7 天后过期的开发描述文件。
-macOS 无法确认开发者身份，第一次打开需要手动放行。
-
-安装：
-1. 把 WageJump 拖到右边的「应用程序」文件夹。
-2. 打开「应用程序」，对 WageJump 点右键，选择「打开」。
-3. 如果仍然被拦截，到「系统设置 → 隐私与安全性」里点「仍要打开」。
-EOF
-
 ln -sfn /Applications "$STAGE/Applications"
+
+echo "==> 绘制安装窗口背景"
+BG_DIR="$ROOT/build/dmg-background"
+BG_2X="$BG_DIR/background@2x.png"
+BG="$BG_DIR/background.jpg"
+swift "$ROOT/scripts/render-dmg-background.swift" "$BG_2X"
+# 访达会忽略带透明通道的 PNG。用 2x JPEG，Retina 上才能铺满整个窗口。
+sips -s format jpeg -s formatOptions 92 -s dpiWidth 144 -s dpiHeight 144 "$BG_2X" --out "$BG" >/dev/null
 
 echo "==> 打包 DMG"
 mkdir -p "$DIST"
 DMG="$DIST/WageJump-${VERSION}.dmg"
-rm -f "$DMG"
-hdiutil create \
-  -volname "WageJump" \
-  -srcfolder "$STAGE" \
-  -ov \
-  -format UDZO \
-  "$DMG"
+RW_DMG="$ROOT/build/WageJump-rw.dmg"
+rm -f "$DMG" "$RW_DMG"
+if mount | grep -q "on /Volumes/WageJump "; then
+  hdiutil detach "/Volumes/WageJump" || hdiutil detach -force "/Volumes/WageJump"
+fi
+
+hdiutil create -size 80m -fs HFS+ -volname "WageJump" "$RW_DMG" >/dev/null
+ATTACHED="$(hdiutil attach -readwrite -noverify -noautoopen "$RW_DMG" | awk 'END {print $1}')"
+VOLUME="/Volumes/WageJump"
+
+ditto "$APP" "$VOLUME/$APP_NAME.app"
+ln -sfn /Applications "$VOLUME/Applications"
+mkdir -p "$VOLUME/.background"
+cp "$BG" "$VOLUME/.background/background.jpg"
+
+# 背景文件夹必须先可见。访达不接受带透明通道的 PNG，所以用 JPEG。
+osascript <<'EOF'
+tell application "Finder"
+  tell disk "WageJump"
+    open
+    delay 1
+    set current view of container window to icon view
+    set toolbar visible of container window to false
+    set statusbar visible of container window to false
+    set the bounds of container window to {80, 60, 800, 640}
+    set viewOptions to the icon view options of container window
+    set arrangement of viewOptions to not arranged
+    set icon size of viewOptions to 128
+    delay 1
+    set background picture of viewOptions to POSIX file "/Volumes/WageJump/.background/background.jpg"
+    delay 1
+    set position of item "WageJump.app" of container window to {196, 330}
+    set position of item "Applications" of container window to {524, 330}
+    update without registering applications
+    delay 4
+    close
+  end tell
+end tell
+EOF
+
+chflags hidden "$VOLUME/.background"
+sync
+hdiutil detach "$ATTACHED" >/dev/null
+hdiutil convert "$RW_DMG" -format UDZO -imagekey zlib-level=9 -o "$DMG" >/dev/null
+rm -f "$RW_DMG"
 
 echo "完成: $DMG"

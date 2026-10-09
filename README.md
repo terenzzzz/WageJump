@@ -165,7 +165,7 @@ dist/WageJump-<版本号>.dmg
 
 `dist/` 和 `build/` 已在 `.gitignore` 里，安装包不会进仓库。这条打包路径不会改工程里的 Team 和日常签名。
 
-磁盘镜像里有 `WageJump.app`、指向「应用程序」的快捷方式，以及 `请先读我.txt`。对方安装：
+打开磁盘镜像后，窗口里会提示把 WageJump 拖到「应用程序」文件夹。对方安装：
 
 1. 把 WageJump 拖进「应用程序」
 2. 在「应用程序」里对 WageJump 点右键，选择「打开」
